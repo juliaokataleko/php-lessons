@@ -1,6 +1,6 @@
 <?php
 /**
- * We use to describe code lines Or to stop lines that cause problems
+ * We use comments to describe code lines Or to stop lines that cause problems
  * This is a multiple line comments in PHP 
  */
 
