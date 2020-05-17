@@ -17,7 +17,7 @@
         // is array function
         echo "<hr>";
 
-        $array = ["John", "Mary"];
+        $array = [12, "John", "Mary"];
 
         if(is_array($array)) {
             for($i=0; $i<count($array); $i++) {
@@ -25,6 +25,15 @@
             }
         } else {
             echo "Its is not a array";
+        }
+
+        // in array function
+        echo "<hr>";
+
+        if(in_array(1255, $array)) { // strict is false
+            echo "True";
+        } else {
+            echo "Not in array";
         }
     ?>
 </body>
