@@ -21,5 +21,13 @@ function cube($num) {
 $cubeResult = cube(4);
 
 echo $cubeResult;
-
+echo "<hr>Native PHP functions<hr>";
+// native PHP functions
+$text = "Julian is clever";
+# substr
+echo substr($text, 0, 6);
+echo "<br>";
+echo substr($text, 7, 2);
+echo "<br>";
+echo substr($text, -1);
 ?>
