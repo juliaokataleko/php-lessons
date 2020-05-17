@@ -10,7 +10,8 @@ echo "<hr>";
 
 $index = 1501;
 
-# do while always show the loop...
+# do while always show the first content loop...
+# first execute, then check condition
 do {
     echo "$index | ";
     $index++;
