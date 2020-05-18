@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working With WebService </title>
+    <script src="jquery.js"></script>
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: arial;
+        }
+
+        html, body {
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 96%;
+            margin: 0 auto;
+        }
+
+        .post {
+            padding: 1.2em; 
+            border: 1px solid #ddd; 
+            margin-bottom: 2em;
+            width: 100%; 
+        }
+
+        #myposts {
+            margin-top: 2em;
+        }
+
+        textarea { 
+            padding: 1.1em;
+            border-radius: 5px;
+            border: 2px solid #0000ff;
+        }
+
+        #saveItem {
+            padding: 6px;
+            border-radius: 5px;
+            border: 2px solid #0000ff;
+            background: #0000ff;
+            color: #fff;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>My posts</h1>
+        <hr>
+    
+    <form>
+        <h3>Add new post</h3>
+        <span style="display: none"> 
+        <label for="title">Título</label> <br>
+        <input type="title" id="title" name="title" style="width: 100%;" value=""> <br>
+        
+        </span>
+       <label for="body">Mensagem</label> <br>
+        <textarea placeholder="O que estás a pensar?" rows="" id="body" cols="" 
+        style="width: 100%;" ></textarea> <br>
+        <input type="button" name="save" onclick="savePost();" 
+        id="saveItem" value="Postar">
+    </form>
+
+    <div id="myposts">
+
+    </div>
+
+    </div>
+
+    <script>
+
+        $(function() {
+            loadData();            
+        });
+    
+        function loadData() {
+            $.get("http://localhost/estudando_php/webservice/service.php", 
+            function(data, status) {
+                // console.log(data); 
+                var postsLength = JSON.parse(data);
+                var posts = JSON.parse(data);
+                // console.log(posts);
+
+                $("#myposts").text("");
+                
+                for(var i = 0; i < postsLength.length; i++) {
+
+                    var post = posts[i].body;
+
+                    post = "<div class='post'>" + post + "</div>";
+                    $("#myposts").append(post);
+
+                }
+                // console.log(post);
+                
+            });
+        }
+
+        function savePost() {
+            var title = $("#title").val();
+            var body = $("#body").val();
+
+            var post = {
+                title : title,
+                body : body
+            };
+
+            console.log(post);
+            
+            if(body) {
+                $.post("http://localhost/estudando_php/webservice/service.php", post, function(data) {
+                    console.log(data); 
+                     var body = $("#body").val("");
+                    loadData();              
+                });
+            } else {
+                alert("Por favor escreva alguma coisa...");
+            }
+            
+        }
+
+    </script>
+
+</body>
+</html>
